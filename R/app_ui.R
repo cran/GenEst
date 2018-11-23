@@ -421,11 +421,11 @@ gMainPanel <- function(){
 #'
 helpPanel <- function(appType = "base"){
   tabPanel("Help",
-    h3("For help, see: ", br(), br(),
+    h5(br(), "For help, see: ",
       a("GenEst User Guide",
-        href = "https://pubs.usgs.gov/tm/7c19/tm7c19.pdf"), br(), br(),
+        href = "https://doi.org/10.3133/tm7C19", target = "_blank"), " and ",
       a("GenEst Statistical Models",
-        href = "https://pubs.usgs.gov/tm/7a2/tm7a2.pdf")),
+        href = " https://doi.org/10.3133/tm7A2", target = "_blank")),
     br(),
     tabsetPanel(
       gettingStartedPanel(),
@@ -455,7 +455,7 @@ gettingStartedPanel <- function(){
 
 #' @rdname GenEstUI
 #'
-#' @description \code{downloadsPanel}: Help panel's Downloads panel. Calls 
+#' @description \code{downloadsPanel}: Help panel's Example Data panel. Calls
 #'   \code{\link{dataDownloadWidget}} for each data set.
 #'
 #' @return \code{downloadsPanel}: Help -> Downloads panel.
@@ -463,7 +463,7 @@ gettingStartedPanel <- function(){
 #' @export
 #'
 downloadsPanel<- function(){
-  tabPanel("Downloads", 
+  tabPanel("Example Data",
       mainPanel(
     column(10, offset = 0,
       br(), 

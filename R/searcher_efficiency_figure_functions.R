@@ -178,7 +178,7 @@ pkmParamPlot <- function(model, pk = "p", col){
 #'
 #' @export
 #'
-pkmSECellPlot <- function(model, specificCell, col, axis_y = TRUE, 
+pkmSECellPlot <- function(model, specificCell, col, axis_y = TRUE,
                           axis_x = TRUE){
 
   CL <- model$CL
@@ -247,7 +247,7 @@ pkmSECellPlot <- function(model, specificCell, col, axis_y = TRUE,
 #'   to restrict the plot
 #'
 #' @param app logical indicating if the plot is for the app
-#' 
+#'
 #' @param cols named vector of colors to use for the specific and reference
 #'   models
 #'
@@ -286,7 +286,7 @@ plot.pkmSet <- function(x, specificModel = NULL, app = FALSE, cols = SEcols(),
 }
 
 
-#' @title Plot results of a single SE model in a set 
+#' @title Plot results of a single SE model in a set
 #'
 #' @description Produce a figures for a specific SE model, as fit by
 #'   \code{\link{pkmSet}}
@@ -361,7 +361,7 @@ plotSEHeader <- function(modelSet, specificModel, app = FALSE,
 
 #' @title p and k box plots for an SE model set
 #'
-#' @description Plot parameter box plots for each cell within a model for 
+#' @description Plot parameter box plots for each cell within a model for
 #'   both p and k with comparison to the cellwise model
 #'
 #' @param modelSet modelSet of class pkmSet
@@ -387,7 +387,7 @@ plotSEBoxPlots <- function(modelSet, specificModel, cols){
 
 #' @title p or k box plots for an SE model set
 #'
-#' @description Plot parameter box plots for each cell within a model for 
+#' @description Plot parameter box plots for each cell within a model for
 #'   either p or k with comparison to the cellwise model
 #'
 #' @param modelSet modelSet of class pkmSet
@@ -516,7 +516,7 @@ pkmSetSpecParamPlot <- function(modelSet, specificModel, pk = "p", cols){
 #' @param cols named vector of colors to use for the specific and reference
 #'   models
 #'
-#' @return a template box plot 
+#' @return a template box plot
 #'
 #' @export
 #'
@@ -551,7 +551,7 @@ plotSEBoxTemplate <- function(modelSet, specificModel, cols){
 
 #' @title Plot the cellwise results of a single model in a set of SE models
 #'
-#' @description Produce a set of cellwise figures for a specific SE model, as 
+#' @description Produce a set of cellwise figures for a specific SE model, as
 #'   fit by \code{\link{pkmSet}}
 #'
 #' @param modelSet pk model set of class pkmSet
@@ -622,7 +622,7 @@ plotSECells <- function(modelSet, specificModel, cols){
 #' @param cols named vector of colors to use for the specific and reference
 #'   models
 #'
-#' @param axes named vector of logical values indicating whether or not to 
+#' @param axes named vector of logical values indicating whether or not to
 #'   plot the x axis and the y axis
 #'
 #' @return a specific cell plot panel
@@ -723,7 +723,7 @@ pkmSetSpecSECellPlot <- function(modelSet, specificModel, specificCell,
 
 
 #' @title Produce a named vectory with standard SE plot colors
-#' 
+#'
 #' @description Produce a named vectory with standard SE plot colors
 #'
 #' @export
@@ -796,4 +796,3 @@ tidyModelSetSE <- function(modelSet){
   class(modelSet) <- c("pkmSet", "list")
   return(modelSet)
 }
-
