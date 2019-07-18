@@ -1,7 +1,7 @@
 Package: GenEst
 Title: Generalized Mortality Estimator
-Version: 1.2.4
-Date: 2019-04-12
+Version: 1.3.0
+Date: 2019-07-18
 Authors@R: c(
     person("Daniel", "Dalthorp", , "ddalthorp@usgs.gov", c("aut", "cre")),
     person("Juniper", "Simonis", , "simonis@dapperstats.com", "aut"),
@@ -25,7 +25,7 @@ Suggests: knitr, rmarkdown, testthat
 VignetteBuilder: knitr
 LinkingTo: Rcpp
 NeedsCompilation: yes
-Packaged: 2019-04-12 17:55:33 UTC; ddalthorp
+Packaged: 2019-07-18 03:50:05 UTC; ddalthorp
 Author: Daniel Dalthorp [aut, cre],
   Juniper Simonis [aut],
   Lisa Madsen [aut],
@@ -37,4 +37,4 @@ Author: Daniel Dalthorp [aut, cre],
   Franzi Korner-Nievergelt [aut]
 Maintainer: Daniel Dalthorp <ddalthorp@usgs.gov>
 Repository: CRAN
-Date/Publication: 2019-04-12 18:22:46 UTC
+Date/Publication: 2019-07-18 15:00:02 UTC
