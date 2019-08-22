@@ -1,6 +1,6 @@
-30f9ffa1861d45bc84320cf68439be26 *DESCRIPTION
-feb3d5abb158c67768df79c2be4324cb *NAMESPACE
-300ed4f1ca109d3928ed549d86543150 *R/GenEst.R
+8e4abe26407061e8bbea6420ca12b2eb *DESCRIPTION
+9fbb3e69f652c77f6d2d0d05020a0c0a *NAMESPACE
+a53bf4ab59f0083d472d61b87d21e00e *R/GenEst.R
 6f0b952616715d7c79cd983f475c9f8a *R/RcppExports.R
 55bcf3a0ad5fdbaf16e500596c267f85 *R/app_content.R
 c5c6d95efdcf4fa1fa212437d1f8d78e *R/app_download_functions.R
@@ -14,7 +14,7 @@ d6a67d7d6325d0203dd84266ea4ba31a *R/app_output_utilities.R
 69c56e1dc4de1cc6572a59b9d6571c0e *R/app_ui_utilities.R
 3a456c61fbe9760d77c471f75d384cd9 *R/app_update_input.R
 bce6de048c260c95ee3419faffea4c8d *R/app_update_output.R
-b541f6c89cb02bdf75278f66fbca6161 *R/app_update_rv.R
+34cc9505bbe904159f097d3e055a5a26 *R/app_update_rv.R
 489a96dc394840093da79ee5dca75886 *R/app_utilities.R
 513f93b1466ece3a1256f018b4a22d75 *R/app_widgets.R
 46a6b9b286a12de489730f18a8221146 *R/carcass_persistence_figure_functions.R
@@ -25,9 +25,9 @@ c556941b6fc279313ffd72c91c514524 *R/data.R
 2d510ef20f4e4f01d5d9016541f12c30 *R/dwp_functions.R
 54340596943d721e9dd7ffc34d61c816 *R/model_utility_functions.R
 b459ba8e6e84adba03ae380b7db568fe *R/mortality_figure_functions.R
-329e924e02f0bc58279798d37ad33920 *R/mortality_functions.R
+d3851e8a1ece537c77d083ddc69a961f *R/mortality_functions.R
 8c820b92ae2d5b0a553314b8f1916f77 *R/searcher_efficiency_figure_functions.R
-dd85711a3bd810fc802858ed94c18526 *R/searcher_efficiency_functions.R
+dbfe80bff790f284abff6b56508f3a88 *R/searcher_efficiency_functions.R
 d8fc137b9fadeef686060a86954672e0 *R/splits_figure_functions.R
 9cd743cfa77769a3017271bb20e7e7fa *R/splits_functions.R
 dbdb9f56227864cb389f2df76f2cedf2 *R/sysdata.rda
@@ -56,16 +56,16 @@ f38b222aa61e77806002da61c3d3d5b2 *inst/app/www/osu.jpg
 e84918274c0dc25b3010464b26cad3b1 *inst/app/www/usgs.png
 70137e6b8a36e4609d7b3f82d7bb125e *inst/app/www/west.png
 567c312e8607766e45dffd802d9ab690 *inst/doc/GenEstGUI.Rmd
-53b5008d87724f7605f77f76417ab092 *inst/doc/GenEstGUI.html
+0834aababff0563317a348a443e9045d *inst/doc/GenEstGUI.html
 6e0f6cd6c13591f7138924b1542afe00 *inst/doc/command-line-example.R
 154e8fda0dc61c9c6be47bc4197c2991 *inst/doc/command-line-example.Rmd
-03ba7c64a24b16391b79b7306db48a12 *inst/doc/command-line-example.html
+06220352f84c56397a191d76e81d8227 *inst/doc/command-line-example.html
 fc1f6aa8d2056037302e5017b7196554 *inst/doc/solar-examples.R
 89c96fd339c20d42351a8c98bcd2daa5 *inst/doc/solar-examples.Rmd
-df90bc40187faa94b15e2b5d40330d92 *inst/doc/solar-examples.html
+c8cbbdacb8f403ed1d05ecec299c8549 *inst/doc/solar-examples.html
 4b4c7f6c4ee841ae9717bf6f02b98605 *inst/doc/wind-examples.R
-e68fb9466cd42f15cc17be28c8d0a575 *inst/doc/wind-examples.Rmd
-fbbb0fb106964b82149bfb304506b247 *inst/doc/wind-examples.html
+d1bf102b3d9a4c4483bc229d3d25bc73 *inst/doc/wind-examples.Rmd
+b5b2f5ca8f7ee5a1ae81f29f2c76f333 *inst/doc/wind-examples.html
 49a35e8128e0bfbcb2c0ee2e80696159 *man/CO_DWP.Rd
 a2942d0b55a2bd594d6d761474d43548 *man/CPcols.Rd
 a5e027fbfa65d87280cce09bc9da9001 *man/CPdistOptions.Rd
@@ -179,7 +179,7 @@ bf30825e11517df72dda498bd7f7e324 *man/obsCols_fta.Rd
 58b6b5f477de95eeaa850ad29eb83edf *man/obsCols_ltp.Rd
 a20a56f1e38567117a9af104ad4eeb77 *man/pickSizeclass.Rd
 32012c96d420ab14a1b526f17d55c513 *man/pkLogLik.Rd
-fb070b97056b6186f0248bf0ab84589b *man/pkm.Rd
+1ed18292fb57219926591fcc2e5c27b0 *man/pkm.Rd
 4b21533acd95b6021854bda2911985a0 *man/pkmFail.Rd
 26b882ba88a53e79abcfd03618882da9 *man/pkmParamPlot.Rd
 0486896e7a4f65dc8c7eb34679dc87af *man/pkmSECellPlot.Rd
@@ -268,4 +268,4 @@ e0445efdc0f52a3b4004a8a0c5da8253 *man/wind_cleared.Rd
 567c312e8607766e45dffd802d9ab690 *vignettes/GenEstGUI.Rmd
 154e8fda0dc61c9c6be47bc4197c2991 *vignettes/command-line-example.Rmd
 89c96fd339c20d42351a8c98bcd2daa5 *vignettes/solar-examples.Rmd
-e68fb9466cd42f15cc17be28c8d0a575 *vignettes/wind-examples.Rmd
+d1bf102b3d9a4c4483bc229d3d25bc73 *vignettes/wind-examples.Rmd
