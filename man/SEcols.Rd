@@ -7,5 +7,6 @@
 SEcols()
 }
 \description{
-Produce a named vectory with standard SE plot colors
+Produce a named vectory with standard SE plot colors. soon to be
+ deprecated.
 }
