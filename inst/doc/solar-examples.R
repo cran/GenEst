@@ -12,6 +12,7 @@ today <- Sys.Date()
 set.seed(951)
 
 ## ------------------------------------------------------------------------
+library(GenEst)
 data(solar_PV)
 names(solar_PV)
 
