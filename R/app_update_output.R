@@ -94,7 +94,7 @@ update_output <- function(eventName, rv, output, input){
     output <- reNULL(output, toNULL)
     if (eventName == "file_CP"){
       output$data_CP <- DT::renderDataTable(datatable(rv$data_CP,
-        caption = paste0("File: ", rv$filename_CP)), server = FALSE)
+          caption = paste0("File: ", rv$filename_CP)), server = FALSE)
       output$filename_CP <- renderText(paste0("File: ", rv$filename_CP))
     }
     dontSuspend <- c("CPModDone", "sizeclasses_CP", "filename_CP",
@@ -387,8 +387,7 @@ update_output <- function(eventName, rv, output, input){
       }
       output$dlCPest <- downloadTable("CP_estimates.csv", rv$modTab_CP,
                                             rv$csvformat)
-      output$dlCPAICc <- downloadTable("CP_AICc.csv", rv$AICcTab_CP,
-                                            rv$csvformat)
+      output$dlCPAICc <- downloadTable("CP_AICc.csv", rv$AICcTab_CP, rv$csvformat)
       output$dlCPfig <- downloadCPFig(rv)
       output$dlCPmod <- downloadCPmod(rv, input)
     }
@@ -424,7 +423,6 @@ update_output <- function(eventName, rv, output, input){
       output$sizeclass_CP1 <- classText(rv, "CP")
       output$sizeclass_CP2 <- classText(rv, "CP")
       output$sizeclass_CP3 <- classText(rv, "CP")
-
       output$dlCPest <- downloadTable("CP_estimates.csv", rv$modTab_CP,
                                             rv$csvformat)
       output$dlCPAICc <- downloadTable("CP_AICc.csv", rv$AICcTab_CP,
@@ -437,8 +435,10 @@ update_output <- function(eventName, rv, output, input){
   if (eventName %in% c("outCPdist", "outCPl", "outCPs")){
     if (length(rv$mods_CP) > 0){
       output$modTab_CP <- DT::renderDataTable(datatable(prettyModTabCP(rv$modTab_CP)))
+      specMod <- ifelse(!grepl("exponential", rv$outCPdlsfig), rv$outCPdlsfig,
+        sub("s ~ 1", "NULL", rv$outCPdlsfig))
       output$fig_CP <- renderPlot(tryCatch(
-        plot(rv$modSet_CP, specificModel = rv$outCPdlsfig, CL = rv$CL),
+        plot(rv$modSet_CP, specificModel = specMod, CL = rv$CL),
           error = function(x) plotNA()),
         height = rv$figH_CP, width = rv$figW_CP,
         pointsize = .pointsize, res = .res)
