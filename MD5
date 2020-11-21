@@ -1,4 +1,4 @@
-769b3de67a25e63db01fccedc7c25e5f *DESCRIPTION
+fea37901885b2b5c468a0a795781d99f *DESCRIPTION
 0432470abd02a4623be7e7f9e8d8294b *NAMESPACE
 acc4d33b2f347e4aad74cb7f64e710b4 *R/GenEst.R
 6f0b952616715d7c79cd983f475c9f8a *R/RcppExports.R
@@ -18,7 +18,7 @@ b797c2db718b46ce15e0243294a1c2a7 *R/app_update_output.R
 19e5a86e6aaab59b36c4f16c2e913b97 *R/app_utilities.R
 7867a4c038a90d515b629041b4961fbc *R/app_widgets.R
 717cb656c338edeb143d103c3b8364b7 *R/carcass_persistence_figure_functions.R
-ecd6cb6480cc8e832b9d18e8c8a8490b *R/carcass_persistence_functions.R
+37ac3442875ad0d980b7c19e632c6aeb *R/carcass_persistence_functions.R
 fc59155dcf87dfc9275bc390a8b7f6ec *R/data.R
 1b24b4f3802c38a58a2fcd40a6014f14 *R/detection_probability_figure_functions.R
 75c931fe7e3873cd9d92b1c939d7352c *R/detection_probability_functions.R
@@ -56,16 +56,16 @@ f38b222aa61e77806002da61c3d3d5b2 *inst/app/www/osu.jpg
 e84918274c0dc25b3010464b26cad3b1 *inst/app/www/usgs.png
 70137e6b8a36e4609d7b3f82d7bb125e *inst/app/www/west.png
 567c312e8607766e45dffd802d9ab690 *inst/doc/GenEstGUI.Rmd
-43b66bebd05d31b775a333bf3a98743f *inst/doc/GenEstGUI.html
+b65f65c6981b9a84fe891ea61f2ae80c *inst/doc/GenEstGUI.html
 ba4456fb1b550fd68979d3c9d6c25c47 *inst/doc/command-line-example.R
 3129834b1ca1593ff7f4844d3d858f3d *inst/doc/command-line-example.Rmd
-32c7b9557b6fbddeb325100b414d7407 *inst/doc/command-line-example.html
+61166869e06d300d4d145776826851ad *inst/doc/command-line-example.html
 d068313425dd97920c002b8d1281b3de *inst/doc/solar-examples.R
 18e6c8b4e9bf89a92f7e044f60eceadd *inst/doc/solar-examples.Rmd
-f5e5f17fb772400ab54b04e9a4c6d4b7 *inst/doc/solar-examples.html
+bc99387c224a9c7ce0fec02387408074 *inst/doc/solar-examples.html
 4b4c7f6c4ee841ae9717bf6f02b98605 *inst/doc/wind-examples.R
-d218bb50e7847f0a02d3935ab4fda50f *inst/doc/wind-examples.Rmd
-eaf03788b29072803f7c22f2aa868656 *inst/doc/wind-examples.html
+2726e91a540725e55e23d684bc7bf4a8 *inst/doc/wind-examples.Rmd
+068560e16c8a6d2c328eb7bd86a356d4 *inst/doc/wind-examples.html
 59bcffe3b5842226d1b144487578412d *man/CO_DWP.Rd
 a2942d0b55a2bd594d6d761474d43548 *man/CPcols.Rd
 a5e027fbfa65d87280cce09bc9da9001 *man/CPdistOptions.Rd
@@ -212,4 +212,4 @@ e0445efdc0f52a3b4004a8a0c5da8253 *man/wind_cleared.Rd
 567c312e8607766e45dffd802d9ab690 *vignettes/GenEstGUI.Rmd
 3129834b1ca1593ff7f4844d3d858f3d *vignettes/command-line-example.Rmd
 18e6c8b4e9bf89a92f7e044f60eceadd *vignettes/solar-examples.Rmd
-d218bb50e7847f0a02d3935ab4fda50f *vignettes/wind-examples.Rmd
+2726e91a540725e55e23d684bc7bf4a8 *vignettes/wind-examples.Rmd
