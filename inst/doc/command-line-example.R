@@ -1,4 +1,6 @@
 ## ----setup, include=FALSE-----------------------------------------------------
+require(rmarkdown)
+require(knitr)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"

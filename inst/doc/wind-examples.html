@@ -12,9 +12,9 @@
 
 <meta name="author" content="Daniel Dalthorp" />
 
-<meta name="date" content="2021-02-12" />
+<meta name="date" content="2021-06-16" />
 
-<title>GenEst - A Tutorial with Wind Examples</title>
+<title>GenEst - 1. A Tutorial with Wind Examples</title>
 
 <script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
 
@@ -28,7 +28,14 @@
     </style>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
@@ -132,15 +139,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<h1 class="title toc-ignore">GenEst - A Tutorial with Wind Examples</h1>
+<h1 class="title toc-ignore">GenEst - 1. A Tutorial with Wind Examples</h1>
 <h4 class="author">Daniel Dalthorp</h4>
-<h4 class="date">2021-02-12</h4>
+<h4 class="date">2021-06-16</h4>
 
 
 
 <div id="introduction-tutorial-with-examples" class="section level2">
 <h2>Introduction: Tutorial with Examples</h2>
-<p>This tutorial provides an introduction to the array of command line tools <strong>GenEst</strong> (1.4.5.1) provides for estimating bird and/or bat mortality and detection probabilities and wind power facilities. The approach is to walk through analyses of realistic but simulated data sets representing studies of bird and bat mortality at a wind power facilities.</p>
+<p>This tutorial provides an introduction to the array of command line tools <strong>GenEst</strong> (1.4.6) provides for estimating bird and/or bat mortality and detection probabilities and wind power facilities. The approach is to walk through analyses of realistic but simulated data sets representing studies of bird and bat mortality at a wind power facilities.</p>
 <p>The general steps in the analysis are:</p>
 <ol style="list-style-type: decimal">
 <li>Construct a model for Searcher Efficiency</li>
