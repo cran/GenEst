@@ -12,7 +12,7 @@
 
 <meta name="author" content="Daniel Dalthorp" />
 
-<meta name="date" content="2021-06-16" />
+<meta name="date" content="2022-11-14" />
 
 <title>GenEst - 1. A Tutorial with Wind Examples</title>
 
@@ -26,6 +26,7 @@
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
     </style>
+
 
 
 <style type="text/css">
@@ -109,13 +110,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -141,13 +149,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <h1 class="title toc-ignore">GenEst - 1. A Tutorial with Wind Examples</h1>
 <h4 class="author">Daniel Dalthorp</h4>
-<h4 class="date">2021-06-16</h4>
+<h4 class="date">2022-11-14</h4>
 
 
 
 <div id="introduction-tutorial-with-examples" class="section level2">
 <h2>Introduction: Tutorial with Examples</h2>
-<p>This tutorial provides an introduction to the array of command line tools <strong>GenEst</strong> (1.4.6) provides for estimating bird and/or bat mortality and detection probabilities and wind power facilities. The approach is to walk through analyses of realistic but simulated data sets representing studies of bird and bat mortality at a wind power facilities.</p>
+<p>This tutorial provides an introduction to the array of command line tools <strong>GenEst</strong> (1.4.7) provides for estimating bird and/or bat mortality and detection probabilities and wind power facilities. The approach is to walk through analyses of realistic but simulated data sets representing studies of bird and bat mortality at a wind power facilities.</p>
 <p>The general steps in the analysis are:</p>
 <ol style="list-style-type: decimal">
 <li>Construct a model for Searcher Efficiency</li>
@@ -486,7 +494,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>To estimate mortality, one model for each size class must be selected from the long list of models fit. GenEst provides several tools for guiding the selection. First, the models can be listed by AICc, which gives a score for the quality of the model for the given data. Complicated models that use many parameters may fit the data more closely than a simpler model but are penalized because of their complexity and relative instability. The scores have meaning only in comparison with other models’. AICc provides a rough but useful guide for model selection, but should in no way be relied upon as definitive. Its utility is in identifying relatively poor models and in narrowing the choice of plausible models to a manageable number.</p>
 <p>The <code>aicc</code> function lists the fitted models in order of <span class="math inline">\({\small \Delta}\)</span>AICc for each size class (if applicable). For this discussion, we will focus on <code>sml</code> only, but for a full analysis, all size classes would need to be similarly analyzed.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aicc</span>(pkModels[[<span class="st">&quot;sml&quot;</span>]])</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    p Formula               k Formula                 AICc &lt;U+0394&gt;AICc</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    p Formula               k Formula                 AICc ΔAICc</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24 p ~ Visibility          k ~ 1                   318.55  0.00</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19 p ~ Visibility          k ~ Visibility          319.69  1.14</span></span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14 p ~ Visibility          k ~ Season              321.42  2.87</span></span>
@@ -553,7 +561,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $sml</span></span>
 <span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 80</span></span>
 <span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="fu">aicc</span>(cpModels[[<span class="st">&quot;sml&quot;</span>]])</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Distribution Location Formula        Scale Formula             AICc &lt;U+0394&gt;AICc</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Distribution Location Formula        Scale Formula             AICc ΔAICc</span></span>
 <span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25 weibull      l ~ 1                   s ~ 1                   780.00  0.00</span></span>
 <span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24 weibull      l ~ Visibility          s ~ 1                   780.16  0.16</span></span>
 <span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15 weibull      l ~ 1                   s ~ Season              780.38  0.38</span></span>

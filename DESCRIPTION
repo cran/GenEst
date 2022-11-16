@@ -1,7 +1,7 @@
 Package: GenEst
 Title: Generalized Mortality Estimator
-Version: 1.4.6
-Date: 2021-06-16
+Version: 1.4.7
+Date: 2022-11-14
 Authors@R: c(
     person("Daniel", "Dalthorp", , "ddalthorp@protonmail.com", c("aut", "cre")),
     person("Juniper", "Simonis", , "simonis@dapperstats.com", "aut"),
@@ -17,15 +17,14 @@ Depends: R (>= 3.5.0)
 License: CC0
 Encoding: UTF-8
 LazyData: true
-Imports: corpus, DT, gsl, gtools, hellno, htmltools, htmlwidgets (>=
-        1.5), lubridate, MASS, matrixStats, mvtnorm, Rcpp, shiny (>=
-        1.4.0), shinyjs, survival
+Imports: corpus, DT, gsl, gtools, hellno, htmltools, lubridate, MASS,
+        matrixStats, mvtnorm, Rcpp, shiny (>= 1.4.0), shinyjs, survival
 RoxygenNote: 7.1.1
-Suggests: knitr, rmarkdown, shinytest, testthat
+Suggests: knitr, rmarkdown, testthat
 VignetteBuilder: knitr
 LinkingTo: Rcpp
 NeedsCompilation: yes
-Packaged: 2021-06-17 06:28:43 UTC; ddalt
+Packaged: 2022-11-14 14:44:52 UTC; ddalt
 Author: Daniel Dalthorp [aut, cre],
   Juniper Simonis [aut],
   Lisa Madsen [aut],
@@ -37,4 +36,4 @@ Author: Daniel Dalthorp [aut, cre],
   Franzi Korner-Nievergelt [aut]
 Maintainer: Daniel Dalthorp <ddalthorp@protonmail.com>
 Repository: CRAN
-Date/Publication: 2021-06-17 07:10:08 UTC
+Date/Publication: 2022-11-16 03:50:31 UTC

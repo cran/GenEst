@@ -12,7 +12,7 @@
 
 <meta name="author" content="J Mintz, D Dalthorp, J Simonis" />
 
-<meta name="date" content="2021-06-16" />
+<meta name="date" content="2022-11-14" />
 
 <title>GenEst - 2. Tutorial with Solar Example</title>
 
@@ -26,6 +26,7 @@
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
     </style>
+
 
 
 <style type="text/css">
@@ -109,13 +110,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -141,7 +149,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <h1 class="title toc-ignore">GenEst - 2. Tutorial with Solar Example</h1>
 <h4 class="author">J Mintz, D Dalthorp, J Simonis</h4>
-<h4 class="date">2021-06-16</h4>
+<h4 class="date">2022-11-14</h4>
 
 
 
@@ -216,7 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;pkm&quot;  &quot;list&quot;</span></span></code></pre></div>
 <p>The set of models is contained in a <code>pkmSet</code> object. We could inspect the two models stored in the <code>pkmSet</code> individually, or for convenience we can view the AICc values simultaneously for all models using the  function. Summary plots can be obtained by plotting any of the individual objects or the set as well.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aicc</span>(SE_model_set)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   p Formula  k Formula   AICc &lt;U+0394&gt;AICc</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   p Formula  k Formula   AICc ΔAICc</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 p ~ 1      k ~ 1     489.00  0.00</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 p ~ Season k ~ 1     492.11  3.11</span></span></code></pre></div>
 <p>Rather than one searcher efficiency model for all birds, it is often preferable to fit a seperate model for each size class. The <code>sizeCol</code> argument of the <code>pkm</code> function is the name of the column in <code>data_SE</code> that gives the size class for each carcass in the SE trials. If a <code>sizeCol</code> is provided, <code>pkm</code> returns a list of separate pk models fit for each size class.</p>
@@ -245,17 +253,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> data_SE, <span class="at">allCombos =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">aicc</span>(SE_size_model_set)</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $lrg</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   p Formula  k Formula  AICc &lt;U+0394&gt;AICc</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   p Formula  k Formula  AICc ΔAICc</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 p ~ Season k ~ 1     95.65  0.00</span></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 p ~ 1      k ~ 1     96.47  0.82</span></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $med</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   p Formula  k Formula   AICc &lt;U+0394&gt;AICc</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   p Formula  k Formula   AICc ΔAICc</span></span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 p ~ 1      k ~ 1     178.62  0.00</span></span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 p ~ Season k ~ 1     182.40  3.78</span></span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $small</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   p Formula  k Formula   AICc &lt;U+0394&gt;AICc</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   p Formula  k Formula   AICc ΔAICc</span></span>
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 p ~ 1      k ~ 1     202.17  0.00</span></span>
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 p ~ Season k ~ 1     206.48  4.31</span></span>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>SE_models <span class="ot">&lt;-</span> <span class="fu">list</span>()</span></code></pre></div>
@@ -337,7 +345,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(CP_weibull_set)</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;cpmSet&quot; &quot;list&quot;</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">aicc</span>(CP_weibull_set)</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Distribution Location Formula Scale Formula    AICc &lt;U+0394&gt;AICc</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Distribution Location Formula Scale Formula    AICc ΔAICc</span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 weibull      l ~ 1            s ~ 1         1046.65  0.00</span></span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 weibull      l ~ Season       s ~ 1         1051.61  4.96</span></span></code></pre></div>
 <p>Finally we will construct sets of CP models for each size class, however this time we will also consider models based on both exponential and weibull distributions. To compare models for multiple distributions, set <code>dist</code> to a vector of the distribution names to be considered. With a <code>sizeCol</code> provided and <code>allCombos = TRUE</code>, <code>cpm</code> returns a list of <code>cpmSet</code> objects, one for each size class.</p>
@@ -362,21 +370,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We now have the flexibility to select models from different families for different size classes. We will choose to use the models with lower AICc, which requires storing the corresponding <code>cpm</code> objects in a list for later use.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aicc</span>(CP_size_model_set)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $lrg</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Distribution Location Formula Scale Formula   AICc &lt;U+0394&gt;AICc</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Distribution Location Formula Scale Formula   AICc ΔAICc</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 exponential  l ~ 1            NULL          294.59  0.00</span></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 weibull      l ~ 1            s ~ 1         295.60  1.01</span></span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 exponential  l ~ Season       NULL          299.61  5.02</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 weibull      l ~ Season       s ~ 1         300.86  6.27</span></span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $med</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Distribution Location Formula Scale Formula   AICc &lt;U+0394&gt;AICc</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Distribution Location Formula Scale Formula   AICc ΔAICc</span></span>
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 weibull      l ~ 1            s ~ 1         352.44  0.00</span></span>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 weibull      l ~ Season       s ~ 1         356.47  4.03</span></span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 exponential  l ~ 1            NULL          358.25  5.81</span></span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 exponential  l ~ Season       NULL          361.45  9.01</span></span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $small</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Distribution Location Formula Scale Formula   AICc &lt;U+0394&gt;AICc</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Distribution Location Formula Scale Formula   AICc ΔAICc</span></span>
 <span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 weibull      l ~ 1            s ~ 1         346.02  0.00</span></span>
 <span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 weibull      l ~ Season       s ~ 1         348.88  2.86</span></span>
 <span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 exponential  l ~ Season       NULL          380.56 34.54</span></span>
