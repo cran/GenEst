@@ -12,7 +12,7 @@
 
 <meta name="author" content="Daniel Dalthorp" />
 
-<meta name="date" content="2022-11-23" />
+<meta name="date" content="2023-05-25" />
 
 <title>GenEst - 1. A Tutorial with Wind Examples</title>
 
@@ -149,13 +149,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <h1 class="title toc-ignore">GenEst - 1. A Tutorial with Wind Examples</h1>
 <h4 class="author">Daniel Dalthorp</h4>
-<h4 class="date">2022-11-23</h4>
+<h4 class="date">2023-05-25</h4>
 
 
 
 <div id="introduction-tutorial-with-examples" class="section level2">
 <h2>Introduction: Tutorial with Examples</h2>
-<p>This tutorial provides an introduction to the array of command line tools <strong>GenEst</strong> (1.4.8) provides for estimating bird and/or bat mortality and detection probabilities and wind power facilities. The approach is to walk through analyses of realistic but simulated data sets representing studies of bird and bat mortality at a wind power facilities.</p>
+<p>This tutorial provides an introduction to the array of command line tools <strong>GenEst</strong> (1.4.9) provides for estimating bird and/or bat mortality and detection probabilities and wind power facilities. The approach is to walk through analyses of realistic but simulated data sets representing studies of bird and bat mortality at a wind power facilities.</p>
 <p>The general steps in the analysis are:</p>
 <ol style="list-style-type: decimal">
 <li>Construct a model for Searcher Efficiency</li>
@@ -494,32 +494,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>To estimate mortality, one model for each size class must be selected from the long list of models fit. GenEst provides several tools for guiding the selection. First, the models can be listed by AICc, which gives a score for the quality of the model for the given data. Complicated models that use many parameters may fit the data more closely than a simpler model but are penalized because of their complexity and relative instability. The scores have meaning only in comparison with other models’. AICc provides a rough but useful guide for model selection, but should in no way be relied upon as definitive. Its utility is in identifying relatively poor models and in narrowing the choice of plausible models to a manageable number.</p>
 <p>The <code>aicc</code> function lists the fitted models in order of <span class="math inline">\({\small \Delta}\)</span>AICc for each size class (if applicable). For this discussion, we will focus on <code>sml</code> only, but for a full analysis, all size classes would need to be similarly analyzed.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aicc</span>(pkModels[[<span class="st">&quot;sml&quot;</span>]])</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    p Formula               k Formula                 AICc ΔAICc</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24 p ~ Visibility          k ~ 1                   318.55  0.00</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19 p ~ Visibility          k ~ Visibility          319.69  1.14</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14 p ~ Visibility          k ~ Season              321.42  2.87</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21 p ~ Visibility * Season k ~ 1                   321.53  2.98</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 p ~ Visibility + Season k ~ 1                   322.17  3.62</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16 p ~ Visibility * Season k ~ Visibility          322.98  4.43</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17 p ~ Visibility + Season k ~ Visibility          323.14  4.59</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9  p ~ Visibility          k ~ Visibility + Season 323.44  4.89</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 p ~ Visibility * Season k ~ Season              323.97  5.42</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 p ~ Visibility + Season k ~ Season              324.33  5.78</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  p Formula               k Formula   AICc ΔAICc</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24          p ~ Visibility                   k ~ 1 318.55  0.00</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19          p ~ Visibility          k ~ Visibility 319.69  1.14</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14          p ~ Visibility              k ~ Season 321.42  2.87</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21 p ~ Visibility * Season                   k ~ 1 321.53  2.98</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 p ~ Visibility + Season                   k ~ 1 322.17  3.62</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16 p ~ Visibility * Season          k ~ Visibility 322.98  4.43</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17 p ~ Visibility + Season          k ~ Visibility 323.14  4.59</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9           p ~ Visibility k ~ Visibility + Season 323.44  4.89</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 p ~ Visibility * Season              k ~ Season 323.97  5.42</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 p ~ Visibility + Season              k ~ Season 324.33  5.78</span></span>
 <span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  p ~ Visibility + Season k ~ Visibility + Season 326.33  7.78</span></span>
 <span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  p ~ Visibility * Season k ~ Visibility + Season 326.51  7.96</span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  p ~ Visibility          k ~ Visibility * Season 327.98  9.43</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4           p ~ Visibility k ~ Visibility * Season 327.98  9.43</span></span>
 <span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  p ~ Visibility + Season k ~ Visibility * Season 331.07 12.52</span></span>
 <span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  p ~ Visibility * Season k ~ Visibility * Season 333.47 14.92</span></span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20 p ~ 1                   k ~ Visibility          339.51 20.96</span></span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 p ~ 1                   k ~ Visibility + Season 342.41 23.86</span></span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18 p ~ Season              k ~ Visibility          342.74 24.19</span></span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  p ~ Season              k ~ Visibility + Season 344.10 25.55</span></span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25 p ~ 1                   k ~ 1                   346.45 27.90</span></span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  p ~ 1                   k ~ Visibility * Season 347.47 28.92</span></span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15 p ~ 1                   k ~ Season              347.66 29.11</span></span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23 p ~ Season              k ~ 1                   350.35 31.80</span></span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13 p ~ Season              k ~ Season              350.44 31.89</span></span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  p ~ Season              k ~ Visibility * Season 350.49 31.94</span></span></code></pre></div>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20                   p ~ 1          k ~ Visibility 339.51 20.96</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10                   p ~ 1 k ~ Visibility + Season 342.41 23.86</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18              p ~ Season          k ~ Visibility 342.74 24.19</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8               p ~ Season k ~ Visibility + Season 344.10 25.55</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25                   p ~ 1                   k ~ 1 346.45 27.90</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5                    p ~ 1 k ~ Visibility * Season 347.47 28.92</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15                   p ~ 1              k ~ Season 347.66 29.11</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23              p ~ Season                   k ~ 1 350.35 31.80</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13              p ~ Season              k ~ Season 350.44 31.89</span></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3               p ~ Season k ~ Visibility * Season 350.49 31.94</span></span></code></pre></div>
 <p>Preference should normally be given to models with <span class="math inline">\({\small \Delta}\)</span>AICc less than 6 or 7. Models with differences of less than 3 or 4 are generally considered indistinguishable by this measure. Choices among such models should be based on other criteria.</p>
 <p>Diagnostic plots can be used to identify potential problems with model fits and to help distinguish between models with similar AICc scores. The <code>plot</code> function is defined for <code>pkm</code> (one model) and <code>pkmSet</code> (set of models for a given size class) objects. For example, <code>plot(pkModels[[&quot;sml&quot;]][[1]])</code> would produce the single figure for the first model for the <code>sml</code> size class. <code>plot(pkModels[[&quot;sml&quot;]])</code> would create plots for each model fit for the <code>sml</code> size class. To plot a specific single model from the full set, use the <code>specificModel</code> argument. For example, diagnostic plots for the model with the lowest AICc score are shown below:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pkModels[[<span class="st">&quot;sml&quot;</span>]], <span class="at">specificModel =</span> <span class="st">&quot;p ~ Visibility; k ~ 1&quot;</span>)</span></code></pre></div>
@@ -561,87 +561,87 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $sml</span></span>
 <span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 80</span></span>
 <span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="fu">aicc</span>(cpModels[[<span class="st">&quot;sml&quot;</span>]])</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Distribution Location Formula        Scale Formula             AICc ΔAICc</span></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25 weibull      l ~ 1                   s ~ 1                   780.00  0.00</span></span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24 weibull      l ~ Visibility          s ~ 1                   780.16  0.16</span></span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15 weibull      l ~ 1                   s ~ Season              780.38  0.38</span></span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19 weibull      l ~ Visibility          s ~ Visibility          780.97  0.97</span></span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20 weibull      l ~ 1                   s ~ Visibility          781.32  1.32</span></span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 weibull      l ~ 1                   s ~ Visibility + Season 782.00  2.00</span></span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14 weibull      l ~ Visibility          s ~ Season              782.04  2.04</span></span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 weibull      l ~ Visibility + Season s ~ 1                   782.55  2.55</span></span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 74 loglogistic  l ~ Visibility          s ~ 1                   782.57  2.57</span></span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21 weibull      l ~ Visibility * Season s ~ 1                   782.77  2.77</span></span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 49 lognormal    l ~ Visibility          s ~ 1                   782.84  2.84</span></span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23 weibull      l ~ Season              s ~ 1                   782.88  2.88</span></span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 71 loglogistic  l ~ Visibility * Season s ~ 1                   783.06  3.06</span></span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13 weibull      l ~ Season              s ~ Season              783.16  3.16</span></span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 50 lognormal    l ~ 1                   s ~ 1                   783.18  3.18</span></span>
-<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 75 loglogistic  l ~ 1                   s ~ 1                   783.30  3.30</span></span>
-<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9  weibull      l ~ Visibility          s ~ Visibility + Season 783.33  3.33</span></span>
-<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16 weibull      l ~ Visibility * Season s ~ Visibility          783.42  3.42</span></span>
-<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 46 lognormal    l ~ Visibility * Season s ~ 1                   783.86  3.86</span></span>
-<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 47 lognormal    l ~ Visibility + Season s ~ 1                   783.86  3.86</span></span>
-<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40 lognormal    l ~ 1                   s ~ Season              783.88  3.88</span></span>
-<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 weibull      l ~ Visibility * Season s ~ Season              783.95  3.95</span></span>
-<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 72 loglogistic  l ~ Visibility + Season s ~ 1                   784.00  4.00</span></span>
-<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17 weibull      l ~ Visibility + Season s ~ Visibility          784.09  4.09</span></span>
-<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 48 lognormal    l ~ Season              s ~ 1                   784.13  4.13</span></span>
-<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 69 loglogistic  l ~ Visibility          s ~ Visibility          784.28  4.28</span></span>
-<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 65 loglogistic  l ~ 1                   s ~ Season              784.30  4.30</span></span>
-<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 weibull      l ~ Visibility + Season s ~ Season              784.48  4.48</span></span>
-<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 73 loglogistic  l ~ Season              s ~ 1                   784.54  4.54</span></span>
-<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 44 lognormal    l ~ Visibility          s ~ Visibility          784.58  4.58</span></span>
-<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18 weibull      l ~ Season              s ~ Visibility          784.85  4.85</span></span>
-<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 66 loglogistic  l ~ Visibility * Season s ~ Visibility          784.85  4.85</span></span>
-<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 64 loglogistic  l ~ Visibility          s ~ Season              784.95  4.95</span></span>
-<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 39 lognormal    l ~ Visibility          s ~ Season              785.01  5.01</span></span>
-<span id="cb28-49"><a href="#cb28-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 38 lognormal    l ~ Season              s ~ Season              785.09  5.09</span></span>
-<span id="cb28-50"><a href="#cb28-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 45 lognormal    l ~ 1                   s ~ Visibility          785.14  5.14</span></span>
-<span id="cb28-51"><a href="#cb28-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  weibull      l ~ Visibility * Season s ~ Visibility + Season 785.29  5.29</span></span>
-<span id="cb28-52"><a href="#cb28-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 70 loglogistic  l ~ 1                   s ~ Visibility          785.31  5.31</span></span>
-<span id="cb28-53"><a href="#cb28-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  weibull      l ~ Season              s ~ Visibility + Season 785.43  5.43</span></span>
-<span id="cb28-54"><a href="#cb28-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 61 loglogistic  l ~ Visibility * Season s ~ Season              785.47  5.47</span></span>
-<span id="cb28-55"><a href="#cb28-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 41 lognormal    l ~ Visibility * Season s ~ Visibility          785.68  5.68</span></span>
-<span id="cb28-56"><a href="#cb28-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 63 loglogistic  l ~ Season              s ~ Season              785.71  5.71</span></span>
-<span id="cb28-57"><a href="#cb28-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36 lognormal    l ~ Visibility * Season s ~ Season              785.89  5.89</span></span>
-<span id="cb28-58"><a href="#cb28-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 35 lognormal    l ~ 1                   s ~ Visibility + Season 786.07  6.07</span></span>
-<span id="cb28-59"><a href="#cb28-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42 lognormal    l ~ Visibility + Season s ~ Visibility          786.15  6.15</span></span>
-<span id="cb28-60"><a href="#cb28-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 37 lognormal    l ~ Visibility + Season s ~ Season              786.29  6.29</span></span>
-<span id="cb28-61"><a href="#cb28-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 67 loglogistic  l ~ Visibility + Season s ~ Visibility          786.30  6.30</span></span>
-<span id="cb28-62"><a href="#cb28-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  weibull      l ~ Visibility + Season s ~ Visibility + Season 786.48  6.48</span></span>
-<span id="cb28-63"><a href="#cb28-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 43 lognormal    l ~ Season              s ~ Visibility          786.48  6.48</span></span>
-<span id="cb28-64"><a href="#cb28-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 60 loglogistic  l ~ 1                   s ~ Visibility + Season 786.56  6.56</span></span>
-<span id="cb28-65"><a href="#cb28-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 62 loglogistic  l ~ Visibility + Season s ~ Season              786.56  6.56</span></span>
-<span id="cb28-66"><a href="#cb28-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 68 loglogistic  l ~ Season              s ~ Visibility          786.89  6.89</span></span>
-<span id="cb28-67"><a href="#cb28-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 59 loglogistic  l ~ Visibility          s ~ Visibility + Season 786.94  6.94</span></span>
-<span id="cb28-68"><a href="#cb28-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 34 lognormal    l ~ Visibility          s ~ Visibility + Season 787.01  7.01</span></span>
-<span id="cb28-69"><a href="#cb28-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 56 loglogistic  l ~ Visibility * Season s ~ Visibility + Season 787.41  7.41</span></span>
-<span id="cb28-70"><a href="#cb28-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 33 lognormal    l ~ Season              s ~ Visibility + Season 787.71  7.71</span></span>
-<span id="cb28-71"><a href="#cb28-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 31 lognormal    l ~ Visibility * Season s ~ Visibility + Season 787.87  7.87</span></span>
-<span id="cb28-72"><a href="#cb28-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 58 loglogistic  l ~ Season              s ~ Visibility + Season 788.35  8.35</span></span>
-<span id="cb28-73"><a href="#cb28-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 32 lognormal    l ~ Visibility + Season s ~ Visibility + Season 788.83  8.83</span></span>
-<span id="cb28-74"><a href="#cb28-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 57 loglogistic  l ~ Visibility + Season s ~ Visibility + Season 789.12  9.12</span></span>
-<span id="cb28-75"><a href="#cb28-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  weibull      l ~ 1                   s ~ Visibility * Season 789.98  9.98</span></span>
-<span id="cb28-76"><a href="#cb28-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  weibull      l ~ Visibility          s ~ Visibility * Season 791.45 11.45</span></span>
-<span id="cb28-77"><a href="#cb28-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  weibull      l ~ Season              s ~ Visibility * Season 793.01 13.01</span></span>
-<span id="cb28-78"><a href="#cb28-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  weibull      l ~ Visibility * Season s ~ Visibility * Season 794.00 14.00</span></span>
-<span id="cb28-79"><a href="#cb28-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30 lognormal    l ~ 1                   s ~ Visibility * Season 794.47 14.47</span></span>
-<span id="cb28-80"><a href="#cb28-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  weibull      l ~ Visibility + Season s ~ Visibility * Season 794.50 14.50</span></span>
-<span id="cb28-81"><a href="#cb28-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 55 loglogistic  l ~ 1                   s ~ Visibility * Season 794.95 14.95</span></span>
-<span id="cb28-82"><a href="#cb28-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 29 lognormal    l ~ Visibility          s ~ Visibility * Season 795.13 15.13</span></span>
-<span id="cb28-83"><a href="#cb28-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 54 loglogistic  l ~ Visibility          s ~ Visibility * Season 795.14 15.14</span></span>
-<span id="cb28-84"><a href="#cb28-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28 lognormal    l ~ Season              s ~ Visibility * Season 795.65 15.65</span></span>
-<span id="cb28-85"><a href="#cb28-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 53 loglogistic  l ~ Season              s ~ Visibility * Season 796.37 16.37</span></span>
-<span id="cb28-86"><a href="#cb28-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 51 loglogistic  l ~ Visibility * Season s ~ Visibility * Season 796.80 16.80</span></span>
-<span id="cb28-87"><a href="#cb28-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26 lognormal    l ~ Visibility * Season s ~ Visibility * Season 797.20 17.20</span></span>
-<span id="cb28-88"><a href="#cb28-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27 lognormal    l ~ Visibility + Season s ~ Visibility * Season 797.36 17.36</span></span>
-<span id="cb28-89"><a href="#cb28-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 52 loglogistic  l ~ Visibility + Season s ~ Visibility * Season 797.70 17.70</span></span>
-<span id="cb28-90"><a href="#cb28-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 76 exponential  l ~ Visibility * Season NULL                    835.23 55.23</span></span>
-<span id="cb28-91"><a href="#cb28-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 79 exponential  l ~ Visibility          NULL                    839.78 59.78</span></span>
-<span id="cb28-92"><a href="#cb28-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 77 exponential  l ~ Visibility + Season NULL                    840.96 60.96</span></span>
-<span id="cb28-93"><a href="#cb28-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 80 exponential  l ~ 1                   NULL                    842.24 62.24</span></span>
-<span id="cb28-94"><a href="#cb28-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 78 exponential  l ~ Season              NULL                    844.75 64.75</span></span></code></pre></div>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Distribution        Location Formula           Scale Formula   AICc ΔAICc</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25      weibull                   l ~ 1                   s ~ 1 780.00  0.00</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24      weibull          l ~ Visibility                   s ~ 1 780.16  0.16</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15      weibull                   l ~ 1              s ~ Season 780.38  0.38</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19      weibull          l ~ Visibility          s ~ Visibility 780.97  0.97</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20      weibull                   l ~ 1          s ~ Visibility 781.32  1.32</span></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10      weibull                   l ~ 1 s ~ Visibility + Season 782.00  2.00</span></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14      weibull          l ~ Visibility              s ~ Season 782.04  2.04</span></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22      weibull l ~ Visibility + Season                   s ~ 1 782.55  2.55</span></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 74  loglogistic          l ~ Visibility                   s ~ 1 782.57  2.57</span></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21      weibull l ~ Visibility * Season                   s ~ 1 782.77  2.77</span></span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 49    lognormal          l ~ Visibility                   s ~ 1 782.84  2.84</span></span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23      weibull              l ~ Season                   s ~ 1 782.88  2.88</span></span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 71  loglogistic l ~ Visibility * Season                   s ~ 1 783.06  3.06</span></span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13      weibull              l ~ Season              s ~ Season 783.16  3.16</span></span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 50    lognormal                   l ~ 1                   s ~ 1 783.18  3.18</span></span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 75  loglogistic                   l ~ 1                   s ~ 1 783.30  3.30</span></span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9       weibull          l ~ Visibility s ~ Visibility + Season 783.33  3.33</span></span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16      weibull l ~ Visibility * Season          s ~ Visibility 783.42  3.42</span></span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 46    lognormal l ~ Visibility * Season                   s ~ 1 783.86  3.86</span></span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 47    lognormal l ~ Visibility + Season                   s ~ 1 783.86  3.86</span></span>
+<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40    lognormal                   l ~ 1              s ~ Season 783.88  3.88</span></span>
+<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11      weibull l ~ Visibility * Season              s ~ Season 783.95  3.95</span></span>
+<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 72  loglogistic l ~ Visibility + Season                   s ~ 1 784.00  4.00</span></span>
+<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17      weibull l ~ Visibility + Season          s ~ Visibility 784.09  4.09</span></span>
+<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 48    lognormal              l ~ Season                   s ~ 1 784.13  4.13</span></span>
+<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 69  loglogistic          l ~ Visibility          s ~ Visibility 784.28  4.28</span></span>
+<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 65  loglogistic                   l ~ 1              s ~ Season 784.30  4.30</span></span>
+<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12      weibull l ~ Visibility + Season              s ~ Season 784.48  4.48</span></span>
+<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 73  loglogistic              l ~ Season                   s ~ 1 784.54  4.54</span></span>
+<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 44    lognormal          l ~ Visibility          s ~ Visibility 784.58  4.58</span></span>
+<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18      weibull              l ~ Season          s ~ Visibility 784.85  4.85</span></span>
+<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 66  loglogistic l ~ Visibility * Season          s ~ Visibility 784.85  4.85</span></span>
+<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 64  loglogistic          l ~ Visibility              s ~ Season 784.95  4.95</span></span>
+<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 39    lognormal          l ~ Visibility              s ~ Season 785.01  5.01</span></span>
+<span id="cb28-49"><a href="#cb28-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 38    lognormal              l ~ Season              s ~ Season 785.09  5.09</span></span>
+<span id="cb28-50"><a href="#cb28-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 45    lognormal                   l ~ 1          s ~ Visibility 785.14  5.14</span></span>
+<span id="cb28-51"><a href="#cb28-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6       weibull l ~ Visibility * Season s ~ Visibility + Season 785.29  5.29</span></span>
+<span id="cb28-52"><a href="#cb28-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 70  loglogistic                   l ~ 1          s ~ Visibility 785.31  5.31</span></span>
+<span id="cb28-53"><a href="#cb28-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8       weibull              l ~ Season s ~ Visibility + Season 785.43  5.43</span></span>
+<span id="cb28-54"><a href="#cb28-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 61  loglogistic l ~ Visibility * Season              s ~ Season 785.47  5.47</span></span>
+<span id="cb28-55"><a href="#cb28-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 41    lognormal l ~ Visibility * Season          s ~ Visibility 785.68  5.68</span></span>
+<span id="cb28-56"><a href="#cb28-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 63  loglogistic              l ~ Season              s ~ Season 785.71  5.71</span></span>
+<span id="cb28-57"><a href="#cb28-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36    lognormal l ~ Visibility * Season              s ~ Season 785.89  5.89</span></span>
+<span id="cb28-58"><a href="#cb28-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 35    lognormal                   l ~ 1 s ~ Visibility + Season 786.07  6.07</span></span>
+<span id="cb28-59"><a href="#cb28-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42    lognormal l ~ Visibility + Season          s ~ Visibility 786.15  6.15</span></span>
+<span id="cb28-60"><a href="#cb28-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 37    lognormal l ~ Visibility + Season              s ~ Season 786.29  6.29</span></span>
+<span id="cb28-61"><a href="#cb28-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 67  loglogistic l ~ Visibility + Season          s ~ Visibility 786.30  6.30</span></span>
+<span id="cb28-62"><a href="#cb28-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7       weibull l ~ Visibility + Season s ~ Visibility + Season 786.48  6.48</span></span>
+<span id="cb28-63"><a href="#cb28-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 43    lognormal              l ~ Season          s ~ Visibility 786.48  6.48</span></span>
+<span id="cb28-64"><a href="#cb28-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 60  loglogistic                   l ~ 1 s ~ Visibility + Season 786.56  6.56</span></span>
+<span id="cb28-65"><a href="#cb28-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 62  loglogistic l ~ Visibility + Season              s ~ Season 786.56  6.56</span></span>
+<span id="cb28-66"><a href="#cb28-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 68  loglogistic              l ~ Season          s ~ Visibility 786.89  6.89</span></span>
+<span id="cb28-67"><a href="#cb28-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 59  loglogistic          l ~ Visibility s ~ Visibility + Season 786.94  6.94</span></span>
+<span id="cb28-68"><a href="#cb28-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 34    lognormal          l ~ Visibility s ~ Visibility + Season 787.01  7.01</span></span>
+<span id="cb28-69"><a href="#cb28-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 56  loglogistic l ~ Visibility * Season s ~ Visibility + Season 787.41  7.41</span></span>
+<span id="cb28-70"><a href="#cb28-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 33    lognormal              l ~ Season s ~ Visibility + Season 787.71  7.71</span></span>
+<span id="cb28-71"><a href="#cb28-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 31    lognormal l ~ Visibility * Season s ~ Visibility + Season 787.87  7.87</span></span>
+<span id="cb28-72"><a href="#cb28-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 58  loglogistic              l ~ Season s ~ Visibility + Season 788.35  8.35</span></span>
+<span id="cb28-73"><a href="#cb28-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 32    lognormal l ~ Visibility + Season s ~ Visibility + Season 788.83  8.83</span></span>
+<span id="cb28-74"><a href="#cb28-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 57  loglogistic l ~ Visibility + Season s ~ Visibility + Season 789.12  9.12</span></span>
+<span id="cb28-75"><a href="#cb28-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5       weibull                   l ~ 1 s ~ Visibility * Season 789.98  9.98</span></span>
+<span id="cb28-76"><a href="#cb28-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       weibull          l ~ Visibility s ~ Visibility * Season 791.45 11.45</span></span>
+<span id="cb28-77"><a href="#cb28-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       weibull              l ~ Season s ~ Visibility * Season 793.01 13.01</span></span>
+<span id="cb28-78"><a href="#cb28-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1       weibull l ~ Visibility * Season s ~ Visibility * Season 794.00 14.00</span></span>
+<span id="cb28-79"><a href="#cb28-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30    lognormal                   l ~ 1 s ~ Visibility * Season 794.47 14.47</span></span>
+<span id="cb28-80"><a href="#cb28-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2       weibull l ~ Visibility + Season s ~ Visibility * Season 794.50 14.50</span></span>
+<span id="cb28-81"><a href="#cb28-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 55  loglogistic                   l ~ 1 s ~ Visibility * Season 794.95 14.95</span></span>
+<span id="cb28-82"><a href="#cb28-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 29    lognormal          l ~ Visibility s ~ Visibility * Season 795.13 15.13</span></span>
+<span id="cb28-83"><a href="#cb28-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 54  loglogistic          l ~ Visibility s ~ Visibility * Season 795.14 15.14</span></span>
+<span id="cb28-84"><a href="#cb28-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28    lognormal              l ~ Season s ~ Visibility * Season 795.65 15.65</span></span>
+<span id="cb28-85"><a href="#cb28-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 53  loglogistic              l ~ Season s ~ Visibility * Season 796.37 16.37</span></span>
+<span id="cb28-86"><a href="#cb28-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 51  loglogistic l ~ Visibility * Season s ~ Visibility * Season 796.80 16.80</span></span>
+<span id="cb28-87"><a href="#cb28-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26    lognormal l ~ Visibility * Season s ~ Visibility * Season 797.20 17.20</span></span>
+<span id="cb28-88"><a href="#cb28-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27    lognormal l ~ Visibility + Season s ~ Visibility * Season 797.36 17.36</span></span>
+<span id="cb28-89"><a href="#cb28-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 52  loglogistic l ~ Visibility + Season s ~ Visibility * Season 797.70 17.70</span></span>
+<span id="cb28-90"><a href="#cb28-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 76  exponential l ~ Visibility * Season                    NULL 835.23 55.23</span></span>
+<span id="cb28-91"><a href="#cb28-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 79  exponential          l ~ Visibility                    NULL 839.78 59.78</span></span>
+<span id="cb28-92"><a href="#cb28-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 77  exponential l ~ Visibility + Season                    NULL 840.96 60.96</span></span>
+<span id="cb28-93"><a href="#cb28-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 80  exponential                   l ~ 1                    NULL 842.24 62.24</span></span>
+<span id="cb28-94"><a href="#cb28-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 78  exponential              l ~ Season                    NULL 844.75 64.75</span></span></code></pre></div>
 <p>It is not uncommon to see the fits for the exponential distribution at the bottom of the AIC list. The exponential distribution has only one parameter and does not have nearly as much flexibility as the others, which each have two-parameters. An implicit assumption of the exponential model is that the scavenging rate is constant, regardless of carcass age. When that assumption is not met, the exponential provides an inferior fit.</p>
 <p>To compare among a set of cp models with plausible AICs, use, for example, <code>plot(cpModels[[&quot;sml&quot;]])</code> to browse through all the models or <code>plot(cpModels[[&quot;sml&quot;]][[&quot;dist: lognormal; p ~ Visibility; k ~ 1&quot;]])</code> to view a single model specified by name. It can be seen from the AICc table (<code>aicc(cpModels[[&quot;sml&quot;]])</code>) that the top 10 models according to AICc are:</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>cp_smlCandidates <span class="ot">&lt;-</span></span>
